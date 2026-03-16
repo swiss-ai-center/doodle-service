@@ -31,6 +31,7 @@ api_summary = """This service will guess what have been doodled.
 api_title = "Doodle API."
 version = "1.0.0"
 
+
 #   //////////////  DECODER   //////////////
 class SimpleDoodleClassifier(nn.Module):
     def __init__(self, nbr_classes=354):
@@ -251,4 +252,3 @@ class MyService(Service):
                     type=FieldDescriptionType.APPLICATION_JSON,
                 )
             }
-
