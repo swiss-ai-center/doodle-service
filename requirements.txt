@@ -1,3 +1,4 @@
+# @Deprecated: This file is deprecated. Please use pyproject.toml instead.
 common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main
 torch==2.2.1
 pillow==10.2.0
