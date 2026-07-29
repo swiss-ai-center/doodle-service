@@ -2,7 +2,7 @@
 name = "doodle"
 version = "1.0.0"
 
-requires-python = "==3.10"
+requires-python = ">=3.10"
 dependencies = [
     "common-code[test] @ git+https://github.com/swiss-ai-center/common-code.git@main",
     "torch==2.2.1",
