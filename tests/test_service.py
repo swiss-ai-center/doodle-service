@@ -2,20 +2,8 @@ import pytest
 from fastapi.testclient import TestClient
 from pytest_httpserver import HTTPServer
 from common_code.config import get_settings
-from common_code.logger.logger import get_logger
-from common_code.storage.service import StorageService
 from main import app
 import time
-
-
-@pytest.fixture(name="storage")
-def storage_fixture():
-    settings = get_settings()
-    logger = get_logger(settings)
-
-    storage = StorageService(logger=logger)
-
-    yield storage
 
 
 @pytest.fixture(name="client")

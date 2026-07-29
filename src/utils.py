@@ -32,7 +32,7 @@ async def lifespan(app: FastAPI):
     # Startup
     logger = get_logger(settings)
     http_client = HttpClient()
-    storage_service = StorageService(logger)
+    storage_service = StorageService(logger, http_client)
     my_service = MyService()
     tasks_service = TasksService(logger, settings, http_client, storage_service)
     service_service = ServiceService(logger, settings, http_client, tasks_service)
@@ -76,6 +76,11 @@ async def lifespan(app: FastAPI):
     heartbeat_task = asyncio.create_task(run_heartbeat(my_service, 20))
     yield
     heartbeat_task.cancel()
+
     # Shutdown
-    for engine_url in settings.engine_urls:
-        await service_service.graceful_shutdown(my_service, engine_url)
+    try:
+        for engine_url in settings.engine_urls:
+            await service_service.graceful_shutdown(my_service, engine_url)
+    finally:
+        await tasks_service.stop()
+        await http_client.aclose()
